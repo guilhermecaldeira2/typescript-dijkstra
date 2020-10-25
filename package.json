@@ -2,11 +2,11 @@
   "name": "tpscript-dijkstra",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "App.js",
   "scripts": {
-    "start": "node ./dist/index.js",
+    "start": "node ./dist/App.js",
     "build": "babel src --extensions \" .js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "dev": "tsnd -r tsconfig-paths/register --transpile-only --respawn --ignore-watch node_modules src/index.ts"
+    "dev": "tsnd -r tsconfig-paths/register --transpile-only --respawn --ignore-watch node_modules src/App.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +17,7 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
+    "@types/node": "^14.14.2",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.3.0",
     "babel-plugin-module-resolver": "^4.0.0",
