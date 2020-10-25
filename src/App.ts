@@ -4,30 +4,39 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-class node {
-  name: string;
-  closed: boolean;
-  dv: number;
-  predecessor: node;
-  adjacents: node[];
+type adjacent = {
+  cost: number;
+  node: Node;
+};
 
-  constructor(name: string) {
+class Node {
+  public name: string;
+  public closed: boolean;
+  public dv: number;
+  public predecessor: Node;
+  public adjacents: adjacent[];
+
+  constructor(name: string, first: boolean = false) {
     this.name = name;
     this.closed = false;
-    this.dv = Number.MAX_SAFE_INTEGER;
+    this.dv = first ? 0 : Number.MAX_SAFE_INTEGER;
   }
 
-  registerAdjacent(node: node) {
-    const find = this.adjacents.find((el) => el.name === node.name);
+  public registerAdjacent(node: Node, cost: number) {
+    const find = this.adjacents.find((el) => el.node.name === node.name);
     if (find) return;
-    this.adjacents.push(node);
+    this.adjacents.push({
+      cost,
+      node,
+    });
   }
 }
 
 class App {
-  params: string[];
-  directed: number;
-  graph: node[];
+  private params: string[];
+  private directed: number;
+  private graph: Node[];
+  private openNodes: Node[];
 
   constructor() {
     // Carrega o arquivo em uma string
@@ -36,18 +45,37 @@ class App {
     this.params = fileData.split('\n');
     // Carrega a variável de informação de direcionamento
     this.directed = parseInt(this.params[0]);
+    // this.init(this.params);
   }
 
-  registerNode(node: node) {
-    const find: node = this.graph.find((el) => el.name === node.name);
+  private registerNode(node: Node) {
+    const find: Node = this.graph.find((el) => el.name === node.name);
     if (find) return;
     this.graph.push(node);
+    this.openNodes.push(node);
   }
 
-  // dijkstra(initialNode: node) {
-  //   console.log('Parâmetros: ', this.params);
-  //   console.log('Direcionado? ', this.directed === 1 ? 'sim' : 'não');
-  // }
+  public dijkstra(initialNode: Node) {
+    console.log('Parâmetros: ', this.params);
+    console.log('Direcionado? ', this.directed === 1 ? 'sim' : 'não');
+    if (!this.openNodes) return this.graph;
+    const sortedNodes: Node[] = this.openNodes.sort((a: Node, b: Node) =>
+      a.dv < b.dv ? -1 : a.dv > b.dv ? 1 : 0,
+    );
+    const nextNode = sortedNodes[0];
+    this.openNodes = this.openNodes.filter((el) => el.name !== nextNode.name);
+    nextNode.adjacents.forEach((el) => {
+      if (el.node.closed) return;
+
+      this.graph.forEach((node: Node) => {
+        if (node.name === el.node.name) {
+          const relax = el.node.dv + el.cost;
+          node.dv = relax > node.dv ? node.dv : relax;
+          node.predecessor = el.node;
+        }
+      });
+    });
+  }
 }
 
-new App();
+const app = new App();
