@@ -38,6 +38,12 @@ class App {
     this.directed = parseInt(this.params[0]);
   }
 
+  registerNode(node: node) {
+    const find: node = this.graph.find((el) => el.name === node.name);
+    if (find) return;
+    this.graph.push(node);
+  }
+
   // dijkstra(initialNode: node) {
   //   console.log('Parâmetros: ', this.params);
   //   console.log('Direcionado? ', this.directed === 1 ? 'sim' : 'não');
