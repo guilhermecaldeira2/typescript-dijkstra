@@ -4,10 +4,30 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
+class node {
+  name: string;
+  closed: boolean;
+  dv: number;
+  predecessor: node;
+  adjacents: node[];
+
+  constructor(name: string) {
+    this.name = name;
+    this.closed = false;
+    this.dv = Number.MAX_SAFE_INTEGER;
+  }
+
+  registerAdjacent(node: node) {
+    const find = this.adjacents.find((el) => el.name === node.name);
+    if (find) return;
+    this.adjacents.push(node);
+  }
+}
+
 class App {
   params: string[];
   directed: number;
-  // graph: node[];
+  graph: node[];
 
   constructor() {
     // Carrega o arquivo em uma string
