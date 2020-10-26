@@ -13,6 +13,8 @@
 <bold>
   modifique o arquivo grafo.txt dentro do diretório dist ao grafo de sua escolha. seguindo o formato:
 </bold>
+<br/>
+<br/>
 <span>
   linha 1: indicação se o grafo é direcionado ( 1 ) ou não ( 0 )
 </span>
