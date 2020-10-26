@@ -41,6 +41,6 @@
 <br/>
   <code>cd typescript-dijkstra</code>
 <br/>
-  <code>npm install/code>
+  <code>npm install</code>
 <br/>
   <code>npm start</code>
