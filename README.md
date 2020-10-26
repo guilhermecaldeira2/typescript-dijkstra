@@ -1,9 +1,9 @@
-### Dijkstra Algorithm
+### Algoritmo de Dijkstra
 
 ## Autores:
 
   <ol>
-    <li>Guilherme caldeira godoy da silva - RA 20768534</li>
+    <li>Guilherme Caldeira Godoy da Silva - RA 20768534</li>
     <li>Gustavo Loredo Costa - RA: 20761292</li>
     <li>Otavio Henrique Pires Costa - RA: 20667147</li>
   </ol>
