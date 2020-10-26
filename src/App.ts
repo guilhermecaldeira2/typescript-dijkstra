@@ -5,6 +5,7 @@
 */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+import { runInThisContext } from 'vm';
 
 type adjacent = {
   cost: number;
@@ -104,7 +105,14 @@ class App {
         if (node.name === params[0]) {
           const name = params[1];
           const cost = parseInt(params[2]);
-          if (!name || !cost) throw new Error('Undled file format');
+          if (!name || !cost) throw new Error('Unhandled file format');
+          if (!this.directed) {
+            this.graph.forEach((el) => {
+              if (el.name === name) {
+                el.registerAdjacent(node.name, cost);
+              }
+            });
+          }
           node.registerAdjacent(name, cost);
         }
       });
