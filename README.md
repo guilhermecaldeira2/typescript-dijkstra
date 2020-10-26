@@ -37,7 +37,7 @@
 <br/>
 <br/>
 <br/>
-  <code>git clone https://github.com/guitdevbr/typescript-dijkstra</code>
+  <code>$ git clone https://github.com/guitdevbr/typescript-dijkstra</code>
 <br/>
-  <code>cd typescript-dijkstra && npm install && npm start</code>
+  <code>$ cd typescript-dijkstra && npm install && npm start</code>
 <br/>
