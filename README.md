@@ -9,7 +9,11 @@
   </ol>
 
 ## Como rodar:
-
+### Requisitos:
+  <ul>
+    <li>Node v12</li>
+    <li>npm v6</li>
+  </ul>
 <bold>
   modifique o arquivo grafo.txt dentro do diretório dist ao grafo de sua escolha. seguindo o formato:
 </bold>
@@ -36,5 +40,7 @@
   <code>git clone https://github.com/guitdevbr/typescript-dijkstra</code>
 <br/>
   <code>cd typescript-dijkstra</code>
+<br/>
+  <code>npm install/code>
 <br/>
   <code>npm start</code>
