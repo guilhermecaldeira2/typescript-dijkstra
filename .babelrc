@@ -10,6 +10,14 @@
     ],
     "@babel/preset-typescript"
   ],
-  "plugins": ["module-resolver"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "root": ["./"]
+      }
+    ]
+  ],
   "ignore": ["**/*.spec.ts", "**/*.txt"]
 }
