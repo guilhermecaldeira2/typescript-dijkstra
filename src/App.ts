@@ -49,8 +49,10 @@ class App {
       console.log('Carga do arquivo falhou! Verifique o nome.');
       return;
     }
+
     // Carrega os parãmetros em um array
     this.params = this.fileData.split('\n');
+
     // Carrega a variável de informação de direcionamento
     try {
       this.directed = this.handleDirectedParam();
@@ -58,27 +60,26 @@ class App {
       console.log('Carga do arquivo falhou! Parâmetro gráfico direcionado, linha 2, inválido.');
       return;
     }
+
+    // inicializa os arrays
     this.graph = [];
     this.openNodes = [];
+
+    // Inicializa o grafo
     try {
       this.init(this.params);
     } catch {
       console.log('Carga do arquivo falhou! Verifique os parâmetros de vertices e arestas.');
+      return;
     }
   }
 
-  handleDirectedParam() {
+  private handleDirectedParam() {
     const directed = parseInt(this.params[0]);
     if (directed === 1 || directed === 0) {
       return directed;
     }
     throw new Error('Unhandled directed param');
-  }
-
-  private registerNode(node: Node) {
-    const find: Node = this.graph.find((el) => el.name === node.name);
-    if (find) return;
-    this.graph.push(node);
   }
 
   private handleNodeNames(params: string[]): void {
@@ -88,6 +89,12 @@ class App {
       if (nodeNames[0] === nodeName) this.registerNode(new Node(nodeName, true));
       this.registerNode(new Node(nodeName));
     });
+  }
+
+  private registerNode(node: Node) {
+    const find: Node = this.graph.find((el) => el.name === node.name);
+    if (find) return;
+    this.graph.push(node);
   }
 
   private handleArrests(params: string[]): void {
@@ -108,12 +115,19 @@ class App {
     this.handleArrests(params);
   }
 
+  private logDijkstraResult(graph: Node[]): void {
+    graph.forEach((node) => {
+      const predecessor: string = node.predecessor ? node.predecessor.name : null;
+      console.log(`Vertice ${node.name}: [${predecessor ? predecessor : '#'} , ${node.dv}]`);
+    });
+  }
+
   public dijkstra(): void {
     console.log(this.directed === 1 ? 'Direcionado' : 'Não direcionado');
     try {
       this.openNodes = this.graph;
 
-      while (this.openNodes.length > 0) {
+      while (this.openNodes.length >> 0) {
         const sortedNodes: Node[] = this.openNodes.sort((a: Node, b: Node) =>
           a.dv < b.dv ? -1 : a.dv > b.dv ? 1 : 0,
         );
@@ -130,17 +144,22 @@ class App {
           this.graph.forEach((u: Node) => {
             if (u.name === adjacent.nodeReference) {
               const relax = nextOpenNode.dv + adjacent.cost;
-              u.dv = relax > u.dv ? u.dv : relax;
-              node.predecessor = u;
+              if (relax < u.dv) {
+                u.dv = relax;
+                node.predecessor = nextOpenNode;
+              }
             }
           });
         });
       }
+
+      console.log('Solução encontrada!');
+      this.logDijkstraResult(this.graph);
+      return;
     } catch {
       console.log('O grafo fornecido está incorreto! Verifique a formatação do arquivo.');
+      return;
     }
-
-    // return this.graph;
   }
 }
 
