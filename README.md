@@ -20,4 +20,5 @@
   linha n+ 2 até o final do arquivo: arestas do grafo (uma por linha) com origem e destino, separados por vírgula
 </p>
 <code>git clone https://github.com/guitdevbr/typescript-dijkstra</code>
+</br>
 <code>npm start</code>
