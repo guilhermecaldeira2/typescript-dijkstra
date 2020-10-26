@@ -33,6 +33,8 @@
 <br/>
 <br/>
 <br/>
-<code>git clone https://github.com/guitdevbr/typescript-dijkstra</code>
-</br>
-<code>npm start</code>
+  <code>git clone https://github.com/guitdevbr/typescript-dijkstra</code>
+<br/>
+  <code>cd typescript-dijkstra</code>
+<br/>
+  <code>npm start</code>
