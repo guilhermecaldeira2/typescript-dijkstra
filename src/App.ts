@@ -1,7 +1,8 @@
 /*
-  
+  Gustavo Loredo Costa - RA: 20761292
+  Guilherme caldeira godoy da silva - RA 20768534
+  Otavio Henrique Pires Costa - RA: 20667147
 */
-import { dir } from 'console';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
@@ -46,8 +47,7 @@ class App {
     try {
       this.fileData = readFileSync(resolve(__dirname, 'grafo.txt'), { encoding: 'utf8' });
     } catch {
-      console.log('Carga do arquivo falhou! Verifique o nome.');
-      return;
+      throw new Error('Carga do arquivo falhou! Verifique o nome.');
     }
 
     // Carrega os parãmetros em um array
@@ -57,8 +57,7 @@ class App {
     try {
       this.directed = this.handleDirectedParam();
     } catch {
-      console.log('Carga do arquivo falhou! Parâmetro gráfico direcionado, linha 2, inválido.');
-      return;
+      throw new Error('Carga do arquivo falhou! Parâmetro gráfico direcionado, linha 1, inválido.');
     }
 
     // inicializa os arrays
@@ -69,8 +68,7 @@ class App {
     try {
       this.init(this.params);
     } catch {
-      console.log('Carga do arquivo falhou! Verifique os parâmetros de vertices e arestas.');
-      return;
+      throw new Error('Carga do arquivo falhou! Verifique os parâmetros de vertices e arestas.');
     }
   }
 
@@ -104,7 +102,10 @@ class App {
       const params = el.split(',');
       this.graph.forEach((node) => {
         if (node.name === params[0]) {
-          node.registerAdjacent(params[1], parseInt(params[2]));
+          const name = params[1];
+          const cost = parseInt(params[2]);
+          if (!name || !cost) throw new Error('Undled file format');
+          node.registerAdjacent(name, cost);
         }
       });
     });
@@ -157,12 +158,10 @@ class App {
       this.logDijkstraResult(this.graph);
       return;
     } catch {
-      console.log('O grafo fornecido está incorreto! Verifique a formatação do arquivo.');
-      return;
+      throw new Error('O grafo fornecido está incorreto! Verifique a formatação do arquivo.');
     }
   }
 }
 
 const app = new App();
-
 app.dijkstra();
