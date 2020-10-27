@@ -7,10 +7,13 @@
     <li>Gustavo Loredo Costa - RA: 20761292</li>
     <li>Otavio Henrique Pires Costa - RA: 20667147</li>
     <li>Laryssa Yumi Nacasima Barros - RA: 20881269</li>
+    <li>Léo Vitor Inocencio Borba - RA: 20765330</li>
   </ol>
 
 ## Como rodar:
+
 ### Requisitos:
+
   <ul>
     <li>Node v12</li>
     <li>npm v6</li>

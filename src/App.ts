@@ -3,10 +3,10 @@
   Guilherme caldeira godoy da silva - RA 20768534
   Otavio Henrique Pires Costa - RA: 20667147
   Laryssa Yumi Nacasima Barros - RA: 20881269
+  Léo Vitor Inocencio Borba - RA: 20765330
 */
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { runInThisContext } from 'vm';
 
 type adjacent = {
   cost: number;
